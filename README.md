@@ -142,6 +142,85 @@ Si vous rencontrez des problèmes lors de l'exécution des services :
 
 ---
 
-## Conclusion
+## 📦 Prérequis
 
-Cette architecture de microservices vous permet de déployer chaque service indépendamment, avec une communication via Kafka pour le passage de messages asynchrones et MongoDB pour la gestion des données. Assurez-vous que tous les services nécessaires sont bien configurés et fonctionnent correctement avant de tester l'application.
+- [Node.js](https://nodejs.org/) (version recommandée : ≥ 16)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+
+## 🚀 Installation
+
+Cloner le dépôt :
+
+```bash
+git clone https://github.com/ton-utilisateur/ton-projet.git
+cd ton-projet
+```
+
+Installer les dépendances :
+
+```bash
+npm install
+# ou
+yarn install
+```
+
+## 🧪 Lancer le serveur de développement
+
+```bash
+npm run dev
+# ou
+yarn dev
+```
+
+Par défaut, l'application sera disponible à l'adresse :
+
+```
+http://localhost:5173/
+```
+
+## 🏗️ Créer une version de production
+
+```bash
+npm run build
+# ou
+yarn build
+```
+
+Les fichiers compilés seront générés dans le dossier `dist/`.
+
+## 🔍 Prévisualiser la build
+
+```bash
+npm run preview
+# ou
+yarn preview
+```
+
+## 📁 Structure de base
+
+```
+ton-projet/
+├── public/             # Fichiers statiques
+├── src/                # Code source React
+│   ├── assets/         # Images et ressources
+│   ├── components/     # Composants réutilisables
+│   ├── App.jsx         # Composant principal
+│   └── main.jsx        # Point d'entrée
+├── index.html          # Fichier HTML principal
+├── vite.config.js      # Configuration Vite
+├── package.json        # Dépendances et scripts
+└── README.md           # Ce fichier
+```
+
+## 📃 Scripts utiles
+
+| Script         | Description                           |
+|----------------|---------------------------------------|
+| `dev`          | Lance le serveur de développement     |
+| `build`        | Construit l’application pour la prod  |
+| `preview`      | Prévisualise la version de production |
+| `lint`         | (Optionnel) Lint le code              |
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.
