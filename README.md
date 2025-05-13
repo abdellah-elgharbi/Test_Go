@@ -75,33 +75,11 @@ Une fois les services construits, vous pouvez les exécuter. Voici les étapes p
 
 ```bash
 java -jar target/question-service.jar
-```
 
-### 4. Lancer l'application React-Vite
 
-Une fois les services microservices en place, vous pouvez démarrer l'application React-Vite pour l'interface utilisateur. Voici les étapes à suivre pour exécuter l'application React-Vite.
 
-1. Naviguez dans le répertoire de votre application React-Vite :
-   
-   ```bash
-   cd TestGo/frentEnd
-   ```
 
-2. Installez les dépendances nécessaires avec npm ou yarn (si ce n'est pas déjà fait) :
-   
-   ```bash
-   npm install
-   ```
-
-3. Démarrez l'application en mode développement :
-   
-   ```bash
-   npm run dev
-   ```
-
-Cela démarrera le serveur de développement React-Vite, et vous pourrez accéder à l'application via [http://localhost:3000](http://localhost:3000) (ou le port configuré).
-
-### 5. Configuration des services
+### 4. Configuration des services
 
 Certains services dépendent de la configuration de Kafka ou MongoDB. Vous pouvez définir ces configurations dans le fichier `application.properties` ou `application.yml` de chaque service. Assurez-vous que chaque service est configuré pour utiliser Kafka et MongoDB, comme suit :
 
