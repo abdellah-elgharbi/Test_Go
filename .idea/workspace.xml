@@ -53,7 +53,6 @@
       <change beforePath="$PROJECT_DIR$/../../discovery-Client/question-service/src/main/resources/application.properties" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../discovery-Client/question-service/src/test/java/com/abdellah/pfa2/evaluation_service/QuestionServiceApplicationTests.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +173,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1747155393546</updated>
-      <workItem from="1747155394780" duration="3074000" />
+      <workItem from="1747155394780" duration="4097000" />
     </task>
     <servers />
   </component>
