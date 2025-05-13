@@ -1,0 +1,182 @@
+<<<<<<< HEAD
+.container {
+ 
+}
+=======
+/* .container1 {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #89C6F9, #4385E0);
+} */
+>>>>>>> 15c1650433ece25e2fb9d5c635743e9a075964a3
+
+.content {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: #162766;
+}
+
+.addButton {
+  padding: 0.5rem 1rem;
+  background-color: #4385E0;
+  color: white;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s;
+}
+
+.addButton:hover {
+  background-color: #162766;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.table {
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tableHead {
+  background-color: rgba(137, 198, 249, 0.1);
+}
+
+.tableHeader {
+  padding: 0.75rem 1.5rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #162766;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tableRow {
+  background-color: white;
+}
+
+.tableCell {
+  padding: 1rem 1.5rem;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  color: #4A5888;
+}
+
+.actionButton {
+  color: #4385E0;
+  margin-right: 0.75rem;
+  transition: color 0.3s;
+}
+
+.actionButton:hover {
+  color: #162766;
+}
+
+.deleteButton {
+  color: #DC2626;
+  transition: color 0.3s;
+}
+
+.deleteButton:hover {
+  color: #991B1B;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 28rem;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #162766;
+  margin-bottom: 1rem;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4A5888;
+  margin-bottom: 0.25rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 0.375rem;
+}
+
+.select {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 0.375rem;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.cancelButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 0.375rem;
+  color: #4A5888;
+  transition: background-color 0.3s;
+}
+
+.cancelButton:hover {
+  background-color: #F3F4F6;
+}
+
+.submitButton {
+  padding: 0.5rem 1rem;
+  background-color: #4385E0;
+  color: white;
+  border-radius: 0.375rem;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #162766;
+} 

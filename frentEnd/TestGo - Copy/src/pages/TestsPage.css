@@ -1,0 +1,130 @@
+/* Variables pour une personnalisation facile */
+:root {
+  --primary-color: #3b82f6;
+  --text-color: #1e293b;
+  --border-color: #e2e8f0;
+  --background-color: #f8fafc;
+  --placeholder-color: #94a3b8;
+  --content-max-width: 1400px;
+  --sidebar-width: 80px;
+  --standard-gap: 2rem;
+  --small-gap: 1rem;
+}
+
+/* Base Layout */
+.tests-page {
+  margin-left: var(--sidebar-width);
+  padding: var(--standard-gap);
+  min-height: 100vh;
+  background-color: var(--background-color);
+  transition: margin-left 0.3s ease;
+}
+
+/* Header Section */
+.tests-header {
+  margin-bottom: var(--standard-gap);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tests-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* Search Components */
+.search-bar {
+  width: 250px;
+  transition: width 0.3s ease;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  background-color: white;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--placeholder-color);
+}
+
+/* Content Grid */
+.tests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: var(--standard-gap);
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* Responsive Breakpoints */
+@media (min-width: 1600px) {
+  .tests-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .tests-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .tests-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1023px) {
+  .tests-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --standard-gap: 1rem;
+  }
+  
+  .tests-page {
+    margin-left: 0;
+    padding: var(--small-gap);
+  }
+  
+  .tests-header {
+    flex-direction: column;
+    gap: var(--small-gap);
+    align-items: stretch;
+  }
+  
+  .search-bar {
+    width: 100%;
+  }
+  
+  .tests-grid {
+    grid-template-columns: 1fr;
+    gap: var(--small-gap);
+  }
+}
+
+@media (max-width: 480px) {
+  .tests-page {
+    padding: 0.75rem;
+  }
+}

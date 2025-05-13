@@ -116,6 +116,22 @@ services:
     networks:
       - backend
 
+  # Flask service
+  flask-service:
+    build:
+      context: ./flask-service  # Dossier contenant le code Flask et Dockerfile
+      dockerfile: Dockerfile
+    container_name: flask-service
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+      - KAFKA_BROKER=kafka:9092  # L'adresse du broker Kafka pour Flask
+    depends_on:
+      - kafka
+    networks:
+      - backend
+
 volumes:
   mongo-data:
 
