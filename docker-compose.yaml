@@ -1,0 +1,124 @@
+version: '3.8'
+
+services:
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper
+
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  discovery-service:
+    build:
+      context: ./dis-service
+      dockerfile: Dockerfile
+    container_name: discovery-service
+    ports:
+      - "8761:8761"
+    networks:
+      - backend
+
+  gateway-service:
+    build:
+      context: ./gateway-service
+      dockerfile: Dockerfile
+    container_name: gateway-service
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+    networks:
+      - backend
+
+  question-service:
+    build:
+      context: ./question-service
+      dockerfile: Dockerfile
+    container_name: question-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - kafka
+      - mongodb
+    networks:
+      - backend
+
+  filier-service:
+    build:
+      context: ./filier-service
+      dockerfile: Dockerfile
+    container_name: filier-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - kafka
+      - mongodb
+    networks:
+      - backend
+
+  ev-service:
+    build:
+      context: ./ev-service
+      dockerfile: Dockerfile
+    container_name: ev-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - kafka
+      - mongodb
+    networks:
+      - backend
+
+  dis-service:
+    build:
+      context: ./dis-service
+      dockerfile: Dockerfile
+    container_name: dis-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - kafka
+      - mongodb
+    networks:
+      - backend
+
+volumes:
+  mongo-data:
+
+networks:
+  backend:
+    driver: bridge

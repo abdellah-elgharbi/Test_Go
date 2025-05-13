@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyseur d'Orientation de Tête</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .video-container {
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 640px;
+            position: relative;
+        }
+        #video {
+            width: 100%;
+            border-radius: 4px;
+        }
+        #canvas {
+            display: none;
+        }
+        .controls {
+            margin: 15px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 20px;
+            display: none;
+        }
+        .result h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        #poseResult {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            text-align: center;
+            margin: 10px 0;
+        }
+        #resultImage {
+            max-width: 100%;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .status.error {
+            background-color: #ffdddd;
+            color: #d8000c;
+        }
+        .status.success {
+            background-color: #ddffdd;
+            color: #4F8A10;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #007bff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Analyseur d'Orientation de Tête</h1>
+        
+        <div class="video-container">
+            <video id="video" autoplay></video>
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <div class="controls">
+            <button id="startBtn">Démarrer la caméra</button>
+            <button id="captureBtn" disabled>Capturer et analyser</button>
+        </div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Analyse en cours...</p>
+        </div>
+
+        <div class="result" id="result">
+            <h2>Résultat de l'analyse:</h2>
+            <div id="poseResult"></div>
+            <img id="resultImage" alt="Image analysée">
+        </div>
+
+        <div id="status" class="status"></div>
+    </div>
+
+    <script>
+        // Éléments du DOM
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const startBtn = document.getElementById('startBtn');
+        const captureBtn = document.getElementById('captureBtn');
+        const result = document.getElementById('result');
+        const poseResult = document.getElementById('poseResult');
+        const resultImage = document.getElementById('resultImage');
+        const statusDiv = document.getElementById('status');
+        const loading = document.getElementById('loading');
+
+        // Vérifier si le navigateur supporte la capture vidéo
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            startBtn.addEventListener('click', startCamera);
+            captureBtn.addEventListener('click', captureAndAnalyze);
+        } else {
+            showStatus("Votre navigateur ne supporte pas la capture vidéo.", true);
+        }
+
+        // Démarrer la caméra
+        function startCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    video.srcObject = stream;
+                    startBtn.disabled = true;
+                    captureBtn.disabled = false;
+                    showStatus("Caméra démarrée. Cliquez sur 'Capturer et analyser'.", false);
+                })
+                .catch(function(error) {
+                    showStatus("Erreur lors de l'accès à la caméra: " + error.message, true);
+                });
+        }
+
+        // Capturer l'image et l'envoyer pour analyse
+        function captureAndAnalyze() {
+            // Configurer le canvas
+            const ctx = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            
+            // Dessiner l'image de la vidéo sur le canvas
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Obtenir l'image en base64
+            const imageData = canvas.toDataURL('image/jpeg');
+            
+            // Afficher le spinner de chargement
+            loading.style.display = 'block';
+            result.style.display = 'none';
+            
+            // Envoyer l'image au serveur pour analyse
+            fetch('/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ image: imageData })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erreur HTTP: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Cacher le spinner de chargement
+                loading.style.display = 'none';
+                
+                // Afficher les résultats
+                poseResult.textContent = data.pose;
+                if (data.result_image) {
+                    resultImage.src = data.result_image;
+                }
+                result.style.display = 'block';
+                showStatus("Analyse terminée avec succès!", false);
+            })
+            .catch(error => {
+                loading.style.display = 'none';
+                showStatus("Erreur lors de l'analyse: " + error.message, true);
+            });
+        }
+
+        // Afficher un message de statut
+        function showStatus(message, isError) {
+            statusDiv.textContent = message;
+            statusDiv.className = isError ? "status error" : "status success";
+        }
+    </script>
+</body>
+</html>

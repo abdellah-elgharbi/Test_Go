@@ -1,0 +1,10 @@
+Flask==2.3.2                # Framework web
+py-eureka-client==0.11.0    # Client pour s'enregistrer dans Eureka
+numpy==1.24.2               # Bibliothèque pour les calculs numériques
+tensorflow==2.12.0          # Bibliothèque de Deep Learning pour l'implémentation du modèle VAE
+pytorch==2.0.0              # Bibliothèque alternative à TensorFlow pour la création de modèles de Deep Learning (si utilisé)
+pandas==1.5.3               # Manipulation de données tabulaires
+scikit-learn==1.2.2         # Pour le Machine Learning général
+matplotlib==3.7.1           # Pour la visualisation des résultats, des graphiques
+seaborn==0.11.2             # Pour la visualisation avancée de données
+gunicorn==20.1.0            # Serveur WSGI pour exécuter Flask en production
