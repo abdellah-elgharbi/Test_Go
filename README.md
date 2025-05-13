@@ -142,6 +142,13 @@ Si vous rencontrez des problèmes lors de l'exécution des services :
 
 ---
 
+
+
+
+Application React + Vite
+
+Cette application est développée avec [React](https://reactjs.org/) et [Vite](https://vitejs.dev/) pour un développement rapide et moderne.
+
 ## 📦 Prérequis
 
 - [Node.js](https://nodejs.org/) (version recommandée : ≥ 16)
@@ -152,8 +159,8 @@ Si vous rencontrez des problèmes lors de l'exécution des services :
 Cloner le dépôt :
 
 ```bash
-git clone https://github.com/ton-utilisateur/ton-projet.git
-cd ton-projet
+git clone https://github.com/elgharbi-abdellah/TestGo
+cd TestGo/frentEnd
 ```
 
 Installer les dépendances :
@@ -168,8 +175,7 @@ yarn install
 
 ```bash
 npm run dev
-# ou
-yarn dev
+
 ```
 
 Par défaut, l'application sera disponible à l'adresse :
@@ -182,8 +188,7 @@ http://localhost:5173/
 
 ```bash
 npm run build
-# ou
-yarn build
+
 ```
 
 Les fichiers compilés seront générés dans le dossier `dist/`.
@@ -192,8 +197,7 @@ Les fichiers compilés seront générés dans le dossier `dist/`.
 
 ```bash
 npm run preview
-# ou
-yarn preview
+
 ```
 
 ## 📁 Structure de base
