@@ -131,6 +131,36 @@ services:
       - kafka
     networks:
       - backend
+  # Test Passage service
+  testPassage-service:
+    build:
+      context: ./test-service
+      dockerfile: Dockerfile
+    container_name: test-service
+    ports:
+      - "8086:8086"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - mongodb
+    networks:
+      - backend
+  # Test service
+  test-service:
+    build:
+      context: ./test-service
+      dockerfile: Dockerfile
+    container_name: test-service
+    ports:
+      - "8087:8087"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - discovery-service
+      - mongodb
+    networks:
+      - backend
 
 volumes:
   mongo-data:
