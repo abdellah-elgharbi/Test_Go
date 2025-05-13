@@ -84,7 +84,7 @@ Une fois les services microservices en place, vous pouvez démarrer l'applicatio
 1. Naviguez dans le répertoire de votre application React-Vite :
    
    ```bash
-   cd path-to-your-react-vite-app
+   cd TestGo/frentEnd
    ```
 
 2. Installez les dépendances nécessaires avec npm ou yarn (si ce n'est pas déjà fait) :
@@ -167,8 +167,7 @@ Installer les dépendances :
 
 ```bash
 npm install
-# ou
-yarn install
+
 ```
 
 ## 🧪 Lancer le serveur de développement
