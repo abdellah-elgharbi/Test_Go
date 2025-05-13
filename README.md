@@ -11,6 +11,7 @@ Avant de démarrer, assurez-vous que les éléments suivants sont installés sur
 - **Maven** (ou **Gradle** si vous préférez)
 - **Kafka** (si vous souhaitez tester les services qui en dépendent)
 - **MongoDB** (si vous souhaitez tester les services qui en dépendent)
+- **Node.js** et **npm** (pour l'application React-Vite)
 - **IDE** comme IntelliJ IDEA ou VSCode pour ouvrir et exécuter le projet
 
 ### Installation de Kafka et MongoDB
@@ -76,7 +77,31 @@ Une fois les services construits, vous pouvez les exécuter. Voici les étapes p
 java -jar target/question-service.jar
 ```
 
-### 4. Configuration des services
+### 4. Lancer l'application React-Vite
+
+Une fois les services microservices en place, vous pouvez démarrer l'application React-Vite pour l'interface utilisateur. Voici les étapes à suivre pour exécuter l'application React-Vite.
+
+1. Naviguez dans le répertoire de votre application React-Vite :
+   
+   ```bash
+   cd path-to-your-react-vite-app
+   ```
+
+2. Installez les dépendances nécessaires avec npm ou yarn (si ce n'est pas déjà fait) :
+   
+   ```bash
+   npm install
+   ```
+
+3. Démarrez l'application en mode développement :
+   
+   ```bash
+   npm run dev
+   ```
+
+Cela démarrera le serveur de développement React-Vite, et vous pourrez accéder à l'application via [http://localhost:3000](http://localhost:3000) (ou le port configuré).
+
+### 5. Configuration des services
 
 Certains services dépendent de la configuration de Kafka ou MongoDB. Vous pouvez définir ces configurations dans le fichier `application.properties` ou `application.yml` de chaque service. Assurez-vous que chaque service est configuré pour utiliser Kafka et MongoDB, comme suit :
 
@@ -87,19 +112,20 @@ spring.kafka.bootstrap-servers=localhost:9092
 spring.data.mongodb.uri=mongodb://localhost:27017/votre-base-de-donnees
 ```
 
-### 5. Vérifier le bon fonctionnement
+### 6. Vérifier le bon fonctionnement
 
 - **Discovery Service** : Accédez à `http://localhost:8761` pour vérifier que le service de découverte fonctionne et que tous les services sont enregistrés.
 - **Autres services** : Accédez à chaque service via les ports appropriés. Par exemple :
   - `http://localhost:8081` pour `question-service`
   - `http://localhost:8082` pour `filier-service`
   - `http://localhost:8083` pour `ev-service`
+- **Application React-Vite** : Accédez à `http://localhost:3000` pour voir l'interface utilisateur en action.
 
-### 6. Consommation et production des messages avec Kafka
+### 7. Consommation et production des messages avec Kafka
 
 Si vous utilisez Kafka dans votre architecture microservices, assurez-vous que Kafka est en cours d'exécution et que les services qui consomment ou produisent des messages à l'aide de Kafka peuvent s'y connecter. Les services qui dépendent de Kafka devront consommer ou produire des messages via des topics Kafka spécifiques.
 
-### 7. Gestion des bases de données
+### 8. Gestion des bases de données
 
 Assurez-vous que **MongoDB** est en cours d'exécution sur le port `27017` et que chaque service qui utilise MongoDB est connecté à la base de données correctement. Vous pouvez vérifier cela en vous connectant à MongoDB avec un outil comme **MongoDB Compass** ou en utilisant des commandes MongoDB dans le terminal.
 
